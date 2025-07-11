@@ -7,23 +7,15 @@ class Routeur{
  
     $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
     $Uris = trim($requestUri, '/');
-    //     if (empty($Uris)) {
-    //     $controller = new CommandeController();
-    //     $controller->store();
-    //     return;
-    // }
- 
-    // var_dump($route[$Uris]);
-    // die;
 
-
-
-
-
-  
     if (isset($route[$Uris])) {
         
         $route = $route[$Uris];
+      
+        if (isset($route['middleware'])) {
+            Middleware::execute($route['middleware']);
+        }
+        
         $controllerClass = $route['controller'];
 
         $method = $route['method'];

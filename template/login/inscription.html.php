@@ -16,7 +16,7 @@
         <?php endif; ?>
         
         <form action="/inscription" method="post" enctype="multipart/form-data">
-            <!-- Nom et Prénom -->
+           
             <div class="form-group">
                 <div class="form-row">
                     <div>
@@ -27,7 +27,7 @@
                             name="nom" 
                             class="form-input <?= isset($error['nom']) ? 'error' : '' ?>"
                             value="<?= htmlspecialchars($donnees['nom'] ?? '') ?>"
-                            required
+                           
                         >
                         <?php if (isset($error['nom'])): ?>
                             <span class="error-text"><?= htmlspecialchars($error['nom']) ?></span>
@@ -41,7 +41,7 @@
                             name="prenom" 
                             class="form-input <?= isset($error['prenom']) ? 'error' : '' ?>"
                             value="<?= htmlspecialchars($donnees['prenom'] ?? '') ?>"
-                            required
+                            
                         >
                         <?php if (isset($error['prenom'])): ?>
                             <span class="error-text"><?= htmlspecialchars($error['prenom']) ?></span>
@@ -50,7 +50,7 @@
                 </div>
             </div>
 
-            <!-- Numéro CNI -->
+          
             <div class="form-group">
                 <label for="cni" class="form-label">Numéro CNI *:</label>
                 <input 
@@ -68,7 +68,7 @@
                 <small class="help-text">Entre 10 et 13 chiffres</small>
             </div>
 
-            <!-- Adresse et Téléphone -->
+           
             <div class="form-group">
                 <div class="form-row">
                     <div>
@@ -79,7 +79,7 @@
                             name="adresse" 
                             class="form-input <?= isset($error['adresse']) ? 'error' : '' ?>"
                             value="<?= htmlspecialchars($donnees['adresse'] ?? '') ?>"
-                            required
+                            
                         >
                         <?php if (isset($error['adresse'])): ?>
                             <span class="error-text"><?= htmlspecialchars($error['adresse']) ?></span>
@@ -104,7 +104,7 @@
                 </div>
             </div>
 
-            <!-- Photos CNI -->
+          
             <div class="upload-container">
                 <div class="upload-row">
                     <div>

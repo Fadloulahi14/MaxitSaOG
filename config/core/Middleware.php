@@ -9,22 +9,11 @@ class Middleware {
         'auth' => AuthMiddleware::class,
     ];
     
-    // public static function apply(string $middlewareName): void {
-    //     if (!isset(self::$middlewares[$middlewareName])) {
-    //         throw new \RuntimeException("Middleware '$middlewareName' non trouvé");
-    //     }
-        
-    //     $middlewareClass = self::$middlewares[$middlewareName];
-    //     $middleware = new $middlewareClass();
-        
-    //     $middleware();
-    // }
-    
-    // public static function register(string $name, string $class): void {
-    //     self::$middlewares[$name] = $class;
-    // }
-    
-    // public static function getMiddlewares(): array {
-    //     return self::$middlewares;
-    // }
+    public static function execute(string $middlewareName): void {
+        if (isset(self::$middlewares[$middlewareName])) {
+            $middlewareClass = self::$middlewares[$middlewareName];
+            $middleware = new $middlewareClass();
+            $middleware();
+        }
+    }
 }
