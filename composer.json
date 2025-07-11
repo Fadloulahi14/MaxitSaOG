@@ -1,0 +1,23 @@
+{
+    "name": "app/entity",
+    "description": "ChalengeTP",
+    "autoload": {
+        "psr-4": {
+            "App\\": "config/",
+            "App\\Entity\\": "src/entity/",
+            "App\\Repository\\": "src/repository/",
+            "App\\Core\\": "config/core/",
+            "App\\Controller\\": "src/controller/",
+            "App\\Service\\": "src/service/",
+            "App\\Middlware\\": "core/middlewares/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Fallou NDIAYE"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
