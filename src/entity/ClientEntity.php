@@ -1,70 +1,50 @@
 <?php
-
 namespace App\Entity;
 
-class ClientEntity extends PersonneClass 
-{
+class ClientEntity {
+    private int $id;
+    private string $nom;
+    private string $prenom;
+    private string $adresse;
     private string $telephone;
-    private array $commandes = [];
+    // private int $compteId;
+    // private string $numeroTelephone;
+    // private float $solde;
+    // private bool $estPrincipale;    
 
-    public function __construct(int $id = 0, string $nom = '', string $prenom = '', string $telephone = '') 
-    {
-        parent::__construct($id, $nom, $prenom, TypeEnum::CLIENT);
+    public function __construct(
+        int $id,
+        string $nom,
+        string $prenom,
+        string $adresse,
+        string $telephone,
+     
+    ) {
+        $this->id = $id;
+        $this->nom = $nom;
+        $this->prenom = $prenom;
+        $this->adresse = $adresse;
         $this->telephone = $telephone;
+        
+    }
+    public function getId(): int {
+        return $this->id;
+    }
+    public function getNom(): string {
+        return $this->nom;
     }
 
-    public function getTelephone(): string 
-    {
+    public function getPrenom(): string {
+        return $this->prenom;
+    }
+
+    public function getAdresse(): string {
+        return $this->adresse;
+    }
+
+    public function getTelephone(): string {
         return $this->telephone;
     }
 
-    public function setTelephone(string $telephone): void 
-    {
-        $this->telephone = $telephone;
-    }
-
-    public function getCommandes(): array
-    {
-        return $this->commandes;
-    }
-
-    public function addCommande($commande): self
-    {
-        $this->commandes[] = $commande;
-        return $this;
-    }
-
-    public function setCommandes(array $commandes): self
-    {
-        $this->commandes = $commandes;
-        return $this;
-    }
-
-    public static function toObject(array $data): static 
-    {
-        $client = new static(
-            $data['id'] ?? 0,
-            $data['nom'] ?? '',
-            $data['prenom'] ?? '',
-            $data['telephone'] ?? ''
-        );
-        
-        if (isset($data['commandes']) && is_array($data['commandes'])) {
-            $client->setCommandes($data['commandes']);
-        }
-        
-        return $client;
-    }
-
-    public function toArray(): array 
-    {
-        return [
-            'id' => $this->getId(),
-            'nom' => $this->getNom(),
-            'prenom' => $this->getPrenom(),
-            'telephone' => $this->telephone,
-            'commandes' => $this->commandes,
-            'type' => $this->type->value
-        ];
-    }
+    
 }

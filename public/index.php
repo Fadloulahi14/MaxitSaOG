@@ -1,4 +1,8 @@
 <?php
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 // use Dotenv\Dotenv;
 use App\core\Routeur;
 
@@ -13,7 +17,7 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 
-$url = $_ENV['URL'];
+$url = $_ENV['ROUTE_WEB'];
 $route = require_once __DIR__ . '/../route/route.web.php';
 
 Routeur::resolve($uris);

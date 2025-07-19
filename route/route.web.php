@@ -1,7 +1,9 @@
 <?php
 use App\Controller\Accueilontroller;
 use App\Controller\ControllerSeuriter;
-use App\core\Middleware; 
+use App\Controller\CompteSecondaireController;
+use App\Controller\AdminController;
+
 
 $uris = [
     "" => [
@@ -14,18 +16,50 @@ $uris = [
     ],
     'inscription' => [
         'controller' => ControllerSeuriter::class,
-         'method' => 'inscription'
+         'method' => 'inscription',
+         'middleware' => 'auth'
         ],
     'create' => [
         'controller' => ControllerSeuriter::class,
-         'method' => 'create'
+         'method' => 'create',
+        //  'middleware' => 'auth'
+        ],
+    'secondaire' => [
+        'controller' => CompteSecondaireController::class,
+         'method' => 'create',
+         'middleware' => 'auth'
         ],
     'store' => [
-        'controller' => ControllerSeuriter::class, 
-        'method' => 'index',
-        'middleware' => 'auth'],
+        'controller' => Accueilontroller::class, 
+        'method' => 'edit',
+        'middleware' => 'auth'
+    ],
+    'stor' => [
+        'controller' => CompteSecondaireController::class, 
+        'method' => 'edit',
+
+        'middleware' => 'auth'
+    ],
+    'transactions' => [
+        'controller' => Accueilontroller::class, 
+        'method' => 'transactions',
+        
+    ],
     'logout' => [
         'controller' => ControllerSeuriter::class, 
         'method' => 'logout'
     ],
+    'admin' => [
+        'controller' => AdminController::class,
+         'method' => 'create'
+        ],
+    'loginAdmin' => [
+        'controller' => AdminController::class,
+         'method' => 'store'
+        ],
+
+
+
+
+
 ];

@@ -14,6 +14,7 @@ return array(
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
     'App\\public\\' => array($baseDir . '/public/upload'),
+    'App\\message\\' => array($baseDir . '/config/message'),
     'App\\Service\\' => array($baseDir . '/src/service'),
     'App\\Repository\\' => array($baseDir . '/src/repository'),
     'App\\Middlware\\' => array($baseDir . '/core/middlewares'),

@@ -4,18 +4,28 @@ namespace App\Controller;
 use App\core\AbstractController;
 use App\core\Session;
 use App\Service\SecurityService;
+use App\Service\TwilioService;
 use App\core\Validator;
-use App\Repository\TransactionRepository;
+use App\message\MessageFr;
+use App\public\Uploader;
+use App\core\App;
 
 class ControllerSeuriter extends AbstractController {
 
     private SecurityService $securityService;
+    private TwilioService $twilioService;
     private Validator $validator;
+    private $uploader;
     
     public function __construct() {
         $this->baseLayout = 'login';
         $this->securityService = new SecurityService();
-        $this->validator = Validator::getInstance();
+        $this->twilioService = new TwilioService();
+        $this->validator = App::getDependency('validator');
+        
+        
+        require_once __DIR__ . '/../../public/upload/Uploader.php';
+        $this->uploader = new Uploader();
     }
 
     private function validateForm(array &$data): array {
@@ -47,17 +57,17 @@ class ControllerSeuriter extends AbstractController {
                 try {
                     $result = $this->securityService->seConnecterClient($telephone);
                     if ($result) {
-                        $session = Session::getInstance();
+                        $session = App::getDependency('session');
                         $session->set('Client', $result);
                         $session->set('user_type', 'client');
                         
                         header('Location: /store');
                         exit();
                     } else {
-                        $errors['global'] = "Aucun compte trouvé avec ce numéro de téléphone: " . $telephone;
+                        $errors['global'] = MessageFr::TELEPHONE_REQUIRED->value . $telephone;
                     }
                 } catch (\Exception $e) {
-                    $errors['global'] = "Erreur de connexion: " . $e->getMessage();
+                    $errors['global'] = MessageFr::ERREUR_CONNEXION->value . $e->getMessage();
                 }
             }
             
@@ -82,20 +92,38 @@ class ControllerSeuriter extends AbstractController {
             $errors = $this->validateForm($donnees);
             
             if (!isset($_FILES['photo-recto']) || $_FILES['photo-recto']['error'] !== UPLOAD_ERR_OK) {
-                $errors['photo-recto'] = 'La photo recto de la CNI est obligatoire';
+                $errors['photo-recto'] = MessageFr::PHOTO_RECTO_OBLIGATOIRE->value;
             }
             
             if (!isset($_FILES['photo-verso']) || $_FILES['photo-verso']['error'] !== UPLOAD_ERR_OK) {
-                $errors['photo-verso'] = 'La photo verso de la CNI est obligatoire';
+                $errors['photo-verso'] = MessageFr::PHOTO_VERSO_OBLIGATOIRE->value;
             }
             
             if (empty($errors)) {
                 try {
-                    $clientId = $this->securityService->creerClient($donnees);
+                  
+                    if ($this->securityService->verifierClientExistant($donnees['telephone'])) {
+                        throw new \RuntimeException("Un client avec ce numéro de téléphone existe déjà");
+                    }
+                    
+                    if ($this->securityService->verifierCniExistant($donnees['cni'])) {
+                        throw new \RuntimeException("Ce numéro CNI est déjà utilisé");
+                    }
+                    
+                    // Gestion des uploads
+                    $photoRecto = $this->uploader->gererUploadPhoto('photo-recto');
+                    $photoVerso = $this->uploader->gererUploadPhoto('photo-verso');
+                    
+                  
+                    $clientId = $this->securityService->creerClient($donnees, $photoRecto, $photoVerso);
                     
                     if ($clientId) {
-                        $session = Session::getInstance();
-                        $session->set('inscription_success', 'Inscription réussie ! Votre compte a été créé avec succès.');
+                       
+                        $telephone = preg_replace('/[^0-9]/', '', $donnees['telephone']);
+                        $this->twilioService->envoyerMessageValidation($telephone, $donnees['prenom']);
+                        
+                        $session =App::getDependency('session');
+                        $session->set('inscription_success', MessageFr::INSCRIPTION_REUSSIE->value);
                         
                         header('Location: /');
                         exit();
@@ -119,7 +147,7 @@ class ControllerSeuriter extends AbstractController {
     }
 
     public function logout() {
-        $session = Session::getInstance();
+        $session = App::getDependency('session');
         $session->destroy();
         header('Location: /');
         exit();
@@ -130,28 +158,6 @@ class ControllerSeuriter extends AbstractController {
     public function delete() {}
     
     public function index() {
-        $session = Session::getInstance();
-        $client = $session->get('Client');
         
-        if (!$client) {
-            header('Location: /');
-            exit();
-        }
-
-        $numero = $client['numeroTelephone'] ?? $client['telephone'] ?? '';
-        $solde = $client['solde'] ?? 0;
-        $compteId = $client['compte_id'] ?? null;
-
-        $transactions = [];
-        if ($compteId) {
-            $transactionRepo = new TransactionRepository();
-            $transactions = $transactionRepo->findByCompteId($compteId);
-        }
-
-        $this->renderIndex('views/acceuil.html.php', [
-            'numero' => $numero,
-            'solde' => $solde,
-            'transactions' => $transactions
-        ]);
     }
 }

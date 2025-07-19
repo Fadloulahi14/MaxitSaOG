@@ -3,13 +3,14 @@
 
     use App\core\Database;
     use PDO;
+    use App\core\App;
 
 
     class PersonneRepository{
         
         private PDO $pdo;
         public function __construct(){
-            $this->pdo = Database::getInstance();
+            $this->pdo = App::getDependency('database');
            
    
         }
@@ -17,7 +18,7 @@
         
         public function selectByLoginAndPassword($login): ?array {
         try {
-            $sql = "SELECT * FROM ServiceCommercial WHERE login = :login";
+            $sql = "SELECT * FROM serviceCommercial WHERE login = :login";
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':login', $login, PDO::PARAM_STR);
             $stmt->execute();
@@ -35,10 +36,10 @@
     public function selectByPhone($phone): ?array {
         try {
             $sql = "SELECT c.id as client_id, c.nom, c.prenom, c.adresse, c.telephone, 
-                   co.id as compte_id, co.numeroTelephone, co.solde, co.estPrincipale 
-            FROM Client c 
-            INNER JOIN Compte co ON c.id = co.id_Client 
-            WHERE c.telephone = :telephone AND co.estPrincipale = true";
+                   co.id as compte_id, co.numerotelephone, co.solde, co.estprincipale 
+            FROM client c 
+            INNER JOIN compte co ON c.id = co.id_client 
+            WHERE c.telephone = :telephone AND co.estprincipale = true";
             
             error_log("Recherche client avec téléphone: " . $phone);
             error_log("SQL: " . $sql);
@@ -62,9 +63,13 @@
 
     public function createClient($nom, $prenom, $adresse, $telephone, $cni, $photoRecto = null, $photoVerso = null): ?int {
         try {
+            
+            // var_dump($nom, $prenom, $adresse, $telephone, $cni, $photoRecto, $photoVerso);
+            // die();
+
             $this->pdo->beginTransaction();
             
-            $sql = "INSERT INTO Client (nom, prenom, adresse, telephone) VALUES (:nom, :prenom, :adresse, :telephone)";
+            $sql = "INSERT INTO client (nom, prenom, adresse, telephone) VALUES (:nom, :prenom, :adresse, :telephone)";
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
             $stmt->bindParam(':prenom', $prenom, PDO::PARAM_STR);
@@ -74,8 +79,8 @@
             
             $clientId = $this->pdo->lastInsertId();
             
-            $sqlCompte = "INSERT INTO Compte (numeroTelephone, numeroCNI, photoRecto, photoVerso, solde, estPrincipale, id_Client) 
-                         VALUES (:telephone, :cni, :photoRecto, :photoVerso, 0, true, :clientId)";
+            $sqlCompte = "INSERT INTO compte (numerotelephone, numerocni, photorecto, photoverso, solde, estprincipale, id_client) 
+                         VALUES (:telephone, :cni, :photorecto, :photoverso, 0, true, :clientId)";
             $stmtCompte = $this->pdo->prepare($sqlCompte);
             $stmtCompte->bindParam(':telephone', $telephone, PDO::PARAM_STR);
             $stmtCompte->bindParam(':cni', $cni, PDO::PARAM_INT);
@@ -96,7 +101,7 @@
 
     public function clientExistsByPhone($phone): bool {
         try {
-            $sql = "SELECT COUNT(*) FROM Client WHERE telephone = :telephone";
+            $sql = "SELECT COUNT(*) FROM client WHERE telephone = :telephone";
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':telephone', $phone, PDO::PARAM_STR);
             $stmt->execute();
@@ -109,7 +114,7 @@
 
     public function cniExists($cni): bool {
         try {
-            $sql = "SELECT COUNT(*) FROM Compte WHERE numeroCNI = :cni";
+            $sql = "SELECT COUNT(*) FROM compte WHERE numeroCNI = :cni";
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':cni', $cni, PDO::PARAM_INT);
             $stmt->execute();

@@ -38,6 +38,7 @@ class ComposerStaticInit84806c7472b27d23935ddc2fd7811599
         'A' => 
         array (
             'App\\public\\' => 11,
+            'App\\message\\' => 12,
             'App\\Service\\' => 12,
             'App\\Repository\\' => 15,
             'App\\Middlware\\' => 14,
@@ -80,6 +81,10 @@ class ComposerStaticInit84806c7472b27d23935ddc2fd7811599
         'App\\public\\' => 
         array (
             0 => __DIR__ . '/../..' . '/public/upload',
+        ),
+        'App\\message\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/config/message',
         ),
         'App\\Service\\' => 
         array (

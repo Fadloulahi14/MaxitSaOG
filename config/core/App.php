@@ -1,66 +1,43 @@
-<!-- <?php
+<?php
 namespace App\core;
+use App\Controller\AdminController;
 use App\core\Database;
 
 use App\core\Routeur;
+use App\Repository\AcceuilRepository;
+use App\Repository\CompteRepository;
+use App\Repository\PersonneRepository;
+use App\Repository\TransactionRepository;
 
 
  class App
 {
-    private static array $container = [];
-    private static bool $initialized = false;
+   private $instance = null; 
 
-    private static function initialize(): void
-    {
-        if (self::$initialized) {
-            return;
-        }
+   private static $dependencies = [
+    'database'=>Database::class,
+    'acceuilRepository'=> AcceuilRepository::class,
+    'compteRepository'=>CompteRepository::class,
+    'personneRepository'=>PersonneRepository::class,
+    'transactionRepository'=>TransactionRepository::class,
+    'routeur'=>Routeur::class,
+    'session'=>Session::class,
+    'acceuilController'=>AcceuilController::class,
+    'adminController'=>AdminController::class,
+    'validator'=>Validator::class,
 
-        $dependencies = [
-            'core' => [
-                // 'router' => Routeur(),
-                'database' => Database::getInstance(),
-                'session' => Session::class,
-                'validator' => Validator::class,
-                
-            ],
-            'abstract' => [
-                'abstractRepo' => AbstractRepository::class,
-                'abstractController' => AbstractController::class,
-                'abstractEntity' => AbstractEntity::class,
-            ],
-            'services' => [
-              
-            ],
-            'repositories' => [
-                
-            ]
-        ];
+   ];
 
-        foreach ($dependencies as $category => $services) {
-            foreach ($services as $key => $class) {
-                // self::$container[$category][$key] = fn() => $class::getInstance();
+   
+   public static function getDependency($key){
+        if(array_key_exists($key, self::$dependencies)){
+            $class = self::$dependencies[$key];
+            
+            if(class_exists($class) && method_exists($class, 'getInstance')){
+                return $class::getInstance();
             }
+            return new $class();
         }
-
-        self::$initialized = true;
-    }
-
-    
-    public static function getDependency(string $category, string $key)
-    {
-        self::initialize();
-
-        if (!isset(self::$container[$category][$key])) {
-            throw new \Exception("Dependency '{$key}' not found in category '{$category}'");
-        }
-
-        $dependency = self::$container[$category][$key];
-
-        if (is_callable($dependency)) {
-            self::$container[$category][$key] = $dependency();
-        }
-
-        return self::$container[$category][$key];
+        throw new \Exception("dialloul");
     }
 } 
