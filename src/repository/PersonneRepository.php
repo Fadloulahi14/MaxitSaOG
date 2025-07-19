@@ -11,6 +11,8 @@
         private PDO $pdo;
         public function __construct(){
             $this->pdo = App::getDependency('database');
+
+           
            
    
         }
@@ -51,8 +53,7 @@
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
             
             error_log("Résultat de la requête: " . print_r($data, true));
-            var_dump($data);
-        //    die();
+         
         //     return $data ?: null; die();
          return $data ?: null;
         } catch (\PDOException $e) {

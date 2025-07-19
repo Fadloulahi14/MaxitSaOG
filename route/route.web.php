@@ -40,6 +40,18 @@ $uris = [
 
         'middleware' => 'auth'
     ],
+       'list' => [
+        'controller' => CompteSecondaireController::class, 
+        'method' => 'liste',
+
+        'middleware' => 'auth'
+    ],
+       'definir-principal' => [
+        'controller' => CompteSecondaireController::class, 
+        'method' => 'definirPrincipal',
+
+        'middleware' => 'auth'
+    ],
     'transactions' => [
         'controller' => Accueilontroller::class, 
         'method' => 'transactions',

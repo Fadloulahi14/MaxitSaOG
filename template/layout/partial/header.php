@@ -20,13 +20,15 @@
             </div>
 
             </a>
-
-            <div class="flex items-center justify-center h-15 mb-4 hover:bg-orange-600 mx-2 rounded-lg cursor-pointer">
+           <a href="list">
+               <div class="flex items-center justify-center h-15 mb-4 hover:bg-orange-600 mx-2 rounded-lg cursor-pointer">
                 <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                     <line x1="1" y1="10" x2="23" y2="10"></line>
                 </svg>
             </div>
+           </a>
+         
             <div class="flex items-center justify-center h-15 mb-4 hover:bg-orange-600 mx-2 rounded-lg cursor-pointer">
                 <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <line x1="8" y1="6" x2="21" y2="6"></line>

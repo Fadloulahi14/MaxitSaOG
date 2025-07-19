@@ -1,0 +1,15 @@
+services:
+  database: App\core\Database
+  acceuilRepository: App\Repository\AcceuilRepository
+  compteRepository: App\Repository\CompteRepository
+  personneRepository: App\Repository\PersonneRepository
+  transactionRepository: App\Repository\TransactionRepository
+  listcompteRepository: App\Repository\ListcompteRepository
+  routeur: App\core\Routeur
+  session: App\core\Session
+  acceuilController: App\Controller\AcceuilController
+  adminController: App\Controller\AdminController
+  compteSecondaireController: App\Controller\CompteSecondaireController
+  validator: App\core\Validator
+  compteSecondaireService: App\Service\CompteSecondaireService
+  listcompteService: App\Service\ListcompteService

@@ -22,6 +22,10 @@ ROUTE_WEB=http://localhost:8000/
 dns = "{$config['driver']}:host={$config['host']}; dbname={$config['dbname']};port={$config['port']}"
 
 
+TWILIO_ACCOUNT_SID=AC59a58465f63dc0b3fe65120c7bab543a
+TWILIO_AUTH_TOKEN=7115a7015ed080ecfbbf3489d721290e
+TWILIO_PHONE_NUMBER=+15705690981
+
 ENV;
         file_put_contents($envPath, $env);
         echo ".env généré avec succès à la racine du projet.\n";
