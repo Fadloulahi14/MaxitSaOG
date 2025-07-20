@@ -1,7 +1,7 @@
 # Nom du Projet
 
 ## Description
-Brève description de votre projet - ce qu'il fait, pourquoi il existe, et quel problème il résout.
+Brève description de mon projet - ce qu'il fait, pourquoi il existe, et quel problème il résout.
 
 ## Table des Matières
 - [Installation](#installation)
