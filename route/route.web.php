@@ -3,6 +3,7 @@ use App\Controller\Accueilontroller;
 use App\Controller\ControllerSeuriter;
 use App\Controller\CompteSecondaireController;
 use App\Controller\AdminController;
+use App\Controller\TransfertController;
 
 
 $uris = [
@@ -61,6 +62,19 @@ $uris = [
         'controller' => ControllerSeuriter::class, 
         'method' => 'logout'
     ],
+
+     'transfert' => [
+        'controller' => TransfertController::class, 
+        'method' => 'transfert',
+        
+    ],
+
+
+
+
+
+
+
     'admin' => [
         'controller' => AdminController::class,
          'method' => 'create'

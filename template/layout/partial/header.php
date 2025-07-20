@@ -38,17 +38,19 @@
             </a>
             
             <!-- Transfert d'argent - Nouvel icône -->
-            <div class="group cursor-pointer">
-                <div class="flex items-center justify-center h-12 hover:bg-orange-700 mx-3 rounded-xl transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg">
-                    <svg class="w-6 h-6 text-white group-hover:text-orange-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M7 17l9.2-9.2M17 17H7v-10"></path>
-                        <circle cx="12" cy="12" r="1"></circle>
-                        <path d="M16 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"></path>
-                        <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
-                        <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
-                    </svg>
+             <a href="transfert">
+                <div class="group cursor-pointer">
+                    <div class="flex items-center justify-center h-12 hover:bg-orange-700 mx-3 rounded-xl transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg">
+                        <svg class="w-6 h-6 text-white group-hover:text-orange-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l9.2-9.2M17 17H7v-10"></path>
+                            <circle cx="12" cy="12" r="1"></circle>
+                            <path d="M16 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"></path>
+                            <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
+                            <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
+                        </svg>
+                    </div>
                 </div>
-            </div>
+            </a>
             
             <!-- Menu - Icône Paramètres -->
             <div class="group cursor-pointer">
