@@ -11,6 +11,9 @@ $dotenv->load();
 use PDO;
 use PDOException;
 
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../../'); // ou adapte le chemin selon ta structure
+$dotenv->load();
+
 class Database
 {
     private ?PDO $pdo = null;

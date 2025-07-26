@@ -41,7 +41,7 @@
         </form>
         
         <div class="links">
-            <a href="/inscription" class="signup-link">Pas encore de compte ? S'inscrire</a>
+            <a href="inscription" class="signup-link">Pas encore de compte ? S'inscrire</a>
             <!-- <a href="/login" class="admin-link">Connexion Agent</a> -->
         </div>
     </div>

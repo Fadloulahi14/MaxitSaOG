@@ -4,6 +4,7 @@ use App\Controller\ControllerSeuriter;
 use App\Controller\CompteSecondaireController;
 use App\Controller\AdminController;
 use App\Controller\TransfertController;
+use App\Controller\CniControlle;
 
 
 $uris = [
@@ -18,8 +19,16 @@ $uris = [
     'inscription' => [
         'controller' => ControllerSeuriter::class,
          'method' => 'inscription',
-         'middleware' => 'auth'
+        //  'middleware' => 'auth'
         ],
+
+        'cni' => [
+        'controller' => CniControlle::class,
+         'method' => 'cni',
+        //  'middleware' => 'auth'
+        ],
+
+
     'create' => [
         'controller' => ControllerSeuriter::class,
          'method' => 'create',

@@ -51,7 +51,7 @@ class Validator{
    public static function getInstance()
    {
        if (self::$instance === null) {
-           self::$instance = new Validator();
+           self::$instance = new self();
        }
        return self::$instance;
    }
