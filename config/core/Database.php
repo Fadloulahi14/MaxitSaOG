@@ -3,10 +3,10 @@
 namespace App\core;
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-use Dotenv\Dotenv;
+// use Dotenv\Dotenv;
 
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../../'); // ou adapte le chemin selon ta structure
-$dotenv->load();
+// $dotenv = Dotenv::createImmutable(__DIR__ . '/../../'); // ou adapte le chemin selon ta structure
+// $dotenv->load();
 
 use PDO;
 use PDOException;
