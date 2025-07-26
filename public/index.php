@@ -13,9 +13,9 @@ use App\core\Routeur;
 
 
 require_once __DIR__ . '/../vendor/autoload.php';
-use Dotenv\Dotenv;
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
+// use Dotenv\Dotenv;
+// $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+// $dotenv->load();
 
 
 $url = $_ENV['ROUTE_WEB'];
