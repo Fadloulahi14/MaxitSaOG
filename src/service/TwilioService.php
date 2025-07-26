@@ -9,9 +9,9 @@ class TwilioService {
     private string $fromNumber;
     
     public function __construct() {
-        $accountSid = $_ENV['TWILIO_ACCOUNT_SID'] ?? '';
-        $authToken = $_ENV['TWILIO_AUTH_TOKEN'] ?? '';
-        $this->fromNumber = $_ENV['TWILIO_PHONE_NUMBER'] ?? '';
+        // $accountSid = $_ENV['TWILIO_ACCOUNT_SID'] ?? '';
+        // $authToken = $_ENV['TWILIO_AUTH_TOKEN'] ?? '';
+        // $this->fromNumber = $_ENV['TWILIO_PHONE_NUMBER'] ?? '';
         
         if (empty($accountSid) || empty($authToken) || empty($this->fromNumber)) {
             throw new \RuntimeException("Configuration Twilio manquante dans .env");

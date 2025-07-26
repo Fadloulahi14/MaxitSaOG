@@ -18,7 +18,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // $dotenv->load();
 
 
-$url = $_ENV['ROUTE_WEB'];
+// $url = $_ENV['ROUTE_WEB'];
 $route = require_once __DIR__ . '/../route/route.web.php';
 
 Routeur::resolve($uris);
