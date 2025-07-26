@@ -13,14 +13,14 @@ use App\core\App;
 class ControllerSeuriter extends AbstractController {
 
     private SecurityService $securityService;
-    private TwilioService $twilioService;
+    // private TwilioService $twilioService;
     private Validator $validator;
     private $uploader;
     
     public function __construct() {
         $this->baseLayout = 'login';
         $this->securityService = new SecurityService();
-        $this->twilioService = new TwilioService();
+        // $this->twilioService = new TwilioService();
         $this->validator = App::getDependency('validator');
         
         
@@ -120,7 +120,7 @@ class ControllerSeuriter extends AbstractController {
                     if ($clientId) {
                        
                         $telephone = preg_replace('/[^0-9]/', '', $donnees['telephone']);
-                        $this->twilioService->envoyerMessageValidation($telephone, $donnees['prenom']);
+                        // $this->twilioService->envoyerMessageValidation($telephone, $donnees['prenom']);
                         
                         $session =App::getDependency('session');
                         $session->set('inscription_success', MessageFr::INSCRIPTION_REUSSIE->value);
